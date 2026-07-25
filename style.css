@@ -1,4 +1,6 @@
-/* Base Dark Theme Styling */
+/* =========================================================
+   GLOBAL DARK THEME & LAYOUT
+   ========================================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -39,9 +41,9 @@ body {
   background-color: #3b82f6;
 }
 
-/* Container Layouts */
+/* Main Page Container */
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -64,7 +66,131 @@ p.subtitle {
   font-size: 0.95rem;
 }
 
-/* Header Inputs */
+/* Header Map Image */
+.map-container {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.map-image, img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   CALCULATOR PAGE STYLES (index.html)
+   ========================================================= */
+.calc-section {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.calc-section h2, .calc-section h3 {
+  color: #38bdf8;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 8px;
+}
+
+.calc-section h4 {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin: 12px 0 8px 0;
+}
+
+/* Checkbox Grid Layout */
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #0f172a;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+/* Number Inputs Grid Layout */
+.inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: #0f172a;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+}
+
+.input-group label {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.input-group input[type="number"] {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+  color: #38bdf8;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Calculation Result Box */
+.result-box {
+  background-color: #1e293b;
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.result-box h2 {
+  font-size: 1.5rem;
+  color: #f8fafc;
+}
+
+.result-box span {
+  color: #60a5fa;
+  font-weight: bold;
+}
+
+/* =========================================================
+   TEAM ROSTER PAGE STYLES (teams.html)
+   ========================================================= */
 .summary-header-inputs {
   display: flex;
   gap: 15px;
@@ -81,7 +207,6 @@ p.subtitle {
   font-size: 0.95rem;
 }
 
-/* Team Card Elements */
 .team-card {
   background-color: #1e293b;
   border: 1px solid #334155;
@@ -133,7 +258,6 @@ p.subtitle {
   min-width: 160px;
 }
 
-/* Roles & Inputs */
 .role-section {
   margin-bottom: 15px;
 }
@@ -203,7 +327,16 @@ button:hover {
 .btn-danger { background-color: #ef4444; color: white; padding: 8px 12px; }
 .btn-remove { background-color: transparent; color: #ef4444; font-size: 1.1rem; padding: 4px 8px; }
 
-/* Summary Display Box */
+.btn-calc {
+  background-color: #2563eb;
+  color: white;
+  width: 100%;
+  padding: 14px;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+/* Summary Display Card */
 .summary-card {
   background-color: #1e293b;
   border: 1px solid #334155;
@@ -257,7 +390,7 @@ footer {
 }
 
 /* =========================================================
-   📱 MOBILE RESPONSIVE STYLES (Screens under 768px width)
+   📱 MOBILE RESPONSIVE STYLES (Only affects screens < 768px)
    ========================================================= */
 @media screen and (max-width: 768px) {
   .container {
@@ -278,13 +411,19 @@ footer {
     padding: 6px 12px;
   }
 
-  /* Header inputs stacked */
+  .checkbox-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inputs-grid {
+    grid-template-columns: 1fr;
+  }
+
   .summary-header-inputs {
     flex-direction: column;
     gap: 10px;
   }
 
-  /* Team Header layout on phone */
   .team-header {
     flex-direction: column;
     align-items: stretch;
@@ -292,14 +431,13 @@ footer {
   }
 
   .arrow-sep {
-    display: none; /* Hide arrow on phone to save room */
+    display: none;
   }
 
   .team-name-input, .building-select {
     width: 100%;
   }
 
-  /* Player Input Rows stacked on small screens */
   .player-row {
     flex-direction: column;
     align-items: stretch;
@@ -328,7 +466,6 @@ footer {
     top: 5px;
   }
 
-  /* Action Buttons stacked full-width for easy finger tapping */
   .actions {
     flex-direction: column;
     gap: 10px;
@@ -345,16 +482,11 @@ footer {
     margin-left: 0;
   }
 
-  /* Summary box adjustments */
   .summary-card {
     padding: 12px;
   }
 
   #summary-header-title {
     font-size: 1.1rem !important;
-  }
-
-  .summary-team-block {
-    padding: 10px;
   }
 }
