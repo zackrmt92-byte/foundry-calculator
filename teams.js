@@ -138,6 +138,63 @@ function generateSummary() {
   document.getElementById('summary-output').scrollIntoView({ behavior: 'smooth' });
 }
 
+// Copy Summary Text to Clipboard
+function copySummaryText() {
+  const legionTitle = document.getElementById('legion-title').value || 'Legion 1';
+  const battleTime = document.getElementById('battle-time').value || '';
+  
+  let formattedText = `📋 **Foundry Battle Plan • ${legionTitle} ${battleTime ? '• ' + battleTime : ''}**\n\n`;
+
+  const teamCards = document.querySelectorAll('.team-card');
+
+  teamCards.forEach((card, index) => {
+    const teamName = card.querySelector('.team-name-input').value || `Team ${index + 1}`;
+    const targetBuilding = card.querySelector('.building-select').value;
+    const buildingText = targetBuilding !== "Assign building..." ? `➔ ${targetBuilding}` : "";
+
+    const leaderName = card.querySelector('.leader-name').value || "";
+    const leaderNote = card.querySelector('.leader-note').value || "";
+
+    formattedText += `**${index + 1}. ${teamName} ${buildingText}**\n`;
+    if (leaderName) {
+      formattedText += `★ Leader: ${leaderName} ${leaderNote ? '(' + leaderNote + ')' : ''}\n`;
+    }
+
+    const joinerRows = card.querySelectorAll('.joiner-row');
+    joinerRows.forEach((row) => {
+      const jName = row.querySelector('.joiner-name').value || "";
+      const jNote = row.querySelector('.joiner-note').value || "";
+      if (jName || jNote) {
+        formattedText += `   • ${jName} ${jNote ? '(' + jNote + ')' : ''}\n`;
+      }
+    });
+
+    formattedText += `\n`;
+  });
+
+  navigator.clipboard.writeText(formattedText.trim()).then(() => {
+    const btn = document.getElementById('copy-btn');
+    const originalText = btn.innerText;
+    btn.innerText = '✅ Copied to Clipboard!';
+    setTimeout(() => { btn.innerText = originalText; }, 2000);
+  });
+}
+
+// Download Summary as Image
+function downloadSummaryImage() {
+  const element = document.getElementById('summary-content');
+
+  html2canvas(element, {
+    backgroundColor: '#0b1120',
+    scale: 2
+  }).then(canvas => {
+    const link = document.createElement('a');
+    link.download = `Foundry_Battle_Plan.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  });
+}
+
 window.onload = function() {
   addTeam("Team 1");
   addTeam("Team 2");
