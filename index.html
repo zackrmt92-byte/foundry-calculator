@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whiteout Survival - Foundry Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html" class="active">Calculator</a>
+    <a href="teams.html">Team Roster</a>
+  </nav>
+
+  <div class="container">
+    <h1>Foundry Score Calculator</h1>
+    
+    <!-- Map Image Header -->
+    <img src="map.png" alt="Foundry Map" class="map-img">
+
+    <div class="section">
+      <h2>1. First Control (One-time Points)</h2>
+      <label><input type="checkbox" id="imperial_fc"> Imperial Foundry (9,000 pts)</label><br>
+      <label><input type="checkbox" id="proto1_fc"> Prototype Site 1 (6,000 pts)</label><br>
+      <label><input type="checkbox" id="proto2_fc"> Prototype Site 2 (6,000 pts)</label><br>
+      <label><input type="checkbox" id="boiler_fc"> Boiler Room (1,200 pts)</label><br>
+      <label><input type="checkbox" id="transit_fc"> Transit Station (1,200 pts)</label><br>
+      <label><input type="checkbox" id="merc_fc"> Mercenary Camp (1,200 pts)</label><br>
+      <label><input type="checkbox" id="munition_fc"> Munitions Warehouse (1,200 pts)</label><br>
+      <hr>
+      <h3>Repair Facilities (3,000 pts each)</h3>
+      <label><input type="checkbox" id="rf1_fc"> Repair Facility 1</label><br>
+      <label><input type="checkbox" id="rf2_fc"> Repair Facility 2</label><br>
+      <label><input type="checkbox" id="rf3_fc"> Repair Facility 3</label><br>
+      <label><input type="checkbox" id="rf4_fc"> Repair Facility 4</label><br>
+      <hr>
+      <h3>Workshops Looted (4,800 pts each)</h3>
+      <label>Workshops Looted (0-24): 
+        <input type="number" id="workshops_count" value="0" min="0" max="24">
+      </label>
+    </div>
+
+    <div class="section">
+      <h2>2. Ongoing Occupation (Hold Time in Minutes)</h2>
+      <p style="font-size: 0.85em; color: #a0aec0;">Enter how many minutes your team held each building:</p>
+      
+      <label>
+        <input type="number" id="imperial_min" value="0" min="0" max="60"> 
+        Imperial Foundry (1,800 pts/m)
+      </label>
+      <label>
+        <input type="number" id="proto1_min" value="0" min="0" max="60"> 
+        Prototype Site 1 (1,200 pts/m)
+      </label>
+      <label>
+        <input type="number" id="proto2_min" value="0" min="0" max="60"> 
+        Prototype Site 2 (1,200 pts/m)
+      </label>
+      <label>
+        <input type="number" id="boiler_min" value="0" min="0" max="60"> 
+        Boiler Room (240 pts/m)
+      </label>
+      <label>
+        <input type="number" id="transit_min" value="0" min="0" max="60"> 
+        Transit Station (240 pts/m)
+      </label>
+      <label>
+        <input type="number" id="merc_min" value="0" min="0" max="60"> 
+        Mercenary Camp (240 pts/m)
+      </label>
+      <label>
+        <input type="number" id="munition_min" value="0" min="0" max="60"> 
+        Munitions Warehouse (240 pts/m)
+      </label>
+      
+      <hr>
+      <h3>Repair Facilities (600 pts/m each)</h3>
+      <label>
+        <input type="number" id="rf1_min" value="0" min="0" max="60"> 
+        Repair Facility 1
+      </label>
+      <label>
+        <input type="number" id="rf2_min" value="0" min="0" max="60"> 
+        Repair Facility 2
+      </label>
+      <label>
+        <input type="number" id="rf3_min" value="0" min="0" max="60"> 
+        Repair Facility 3
+      </label>
+      <label>
+        <input type="number" id="rf4_min" value="0" min="0" max="60"> 
+        Repair Facility 4
+      </label>
+    </div>
+
+    <button onclick="calculateScore()" style="width:100%; background-color:#2563eb; color:white;">Calculate Total Points</button>
+
+    <div class="result">
+      <h3>Total Estimated Arsenal Points: <span id="total-score">0</span></h3>
+    </div>
+  </div>
+
+  <footer>
+    Made by <strong>Zaak</strong>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

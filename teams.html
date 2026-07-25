@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundry Team Roster</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="index.html">Calculator</a>
+    <a href="teams.html" class="active">Team Roster</a>
+  </nav>
+
+  <div class="container wide">
+    <h1>Foundry Strategy & Team Roster</h1>
+    <p class="subtitle">Assign team leaders, joiners, and target buildings.</p>
+
+    <!-- Battle Plan Header Options -->
+    <div class="summary-header-inputs">
+      <input type="text" id="legion-title" placeholder="Legion Title (e.g. Legion 1)" value="Legion 1">
+      <input type="text" id="battle-time" placeholder="Battle Date & Time (e.g. 2026-07-26 14:00 UTC)" value="2026-07-26 14:00 UTC">
+    </div>
+
+    <div id="teams-container">
+      <!-- Teams will be dynamically added here -->
+    </div>
+
+    <div class="actions">
+      <button onclick="addTeam()" class="btn-add">+ Add New Team</button>
+      <button onclick="generateSummary()" class="btn-primary">📋 Generate Battle Plan Summary</button>
+      <button onclick="resetTeams()" class="btn-reset">Reset All Teams</button>
+    </div>
+
+    <!-- Summary Output Section -->
+    <div id="summary-output" class="summary-card" style="display: none;">
+      <h2 id="summary-header-title">Foundry Battle Plan • Legion 1 • 2026-07-26 14:00 UTC</h2>
+      <div id="summary-teams-list"></div>
+    </div>
+  </div>
+
+  <footer>
+    Made by <strong>Zaak</strong>
+  </footer>
+
+  <script src="teams.js"></script>
+</body>
+</html>
