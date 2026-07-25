@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foundry Team Roster</title>
   <link rel="stylesheet" href="style.css">
-  <!-- html2canvas library for saving summary as image -->
+  <!-- html2canvas library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
@@ -38,15 +38,15 @@
 
     <!-- Summary Output Section -->
     <div id="summary-output" class="summary-card" style="display: none;">
-      <div id="summary-content" style="padding: 10px; background-color: #0b1120; border-radius: 6px;">
-        <h2 id="summary-header-title">Foundry Battle Plan • Legion 1 • 2026-07-26 14:00 UTC</h2>
+      <div id="summary-content" style="padding: 15px; background-color: #0b1120; border-radius: 8px;">
+        <h2 id="summary-header-title" style="margin-bottom: 15px;">Foundry Battle Plan • Legion 1 • 2026-07-26 14:00 UTC</h2>
         <div id="summary-teams-list"></div>
       </div>
 
       <!-- Action Buttons for Export -->
-      <div class="actions" style="margin-top: 15px;">
+      <div class="actions" style="margin-top: 15px; display: flex; justify-content: space-between;">
         <button id="copy-btn" onclick="copySummaryText()" class="btn-primary" style="background-color: #0284c7;">📋 Copy Text for Discord / Chat</button>
-        <button onclick="downloadSummaryImage()" class="btn-primary" style="background-color: #16a34a;">📸 Save as Image (PNG)</button>
+        <button id="img-btn" onclick="downloadSummaryImage()" class="btn-primary" style="background-color: #16a34a;">📸 Save as Image (PNG)</button>
       </div>
     </div>
   </div>

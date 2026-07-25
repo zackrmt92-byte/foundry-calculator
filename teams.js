@@ -138,60 +138,76 @@ function generateSummary() {
   document.getElementById('summary-output').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Copy Summary Text to Clipboard
+// Copy Text function reading directly from the rendered summary box
 function copySummaryText() {
-  const legionTitle = document.getElementById('legion-title').value || 'Legion 1';
-  const battleTime = document.getElementById('battle-time').value || '';
+  const headerText = document.getElementById('summary-header-title').innerText;
+  let textOutput = `📋 **${headerText}**\n\n`;
+
+  const blocks = document.querySelectorAll('.summary-team-block');
   
-  let formattedText = `📋 **Foundry Battle Plan • ${legionTitle} ${battleTime ? '• ' + battleTime : ''}**\n\n`;
+  blocks.forEach(block => {
+    const title = block.querySelector('.summary-team-title')?.innerText || '';
+    const leader = block.querySelector('.summary-leader')?.innerText || '';
+    const joinerItems = block.querySelectorAll('.summary-joiners li');
 
-  const teamCards = document.querySelectorAll('.team-card');
-
-  teamCards.forEach((card, index) => {
-    const teamName = card.querySelector('.team-name-input').value || `Team ${index + 1}`;
-    const targetBuilding = card.querySelector('.building-select').value;
-    const buildingText = targetBuilding !== "Assign building..." ? `➔ ${targetBuilding}` : "";
-
-    const leaderName = card.querySelector('.leader-name').value || "";
-    const leaderNote = card.querySelector('.leader-note').value || "";
-
-    formattedText += `**${index + 1}. ${teamName} ${buildingText}**\n`;
-    if (leaderName) {
-      formattedText += `★ Leader: ${leaderName} ${leaderNote ? '(' + leaderNote + ')' : ''}\n`;
-    }
-
-    const joinerRows = card.querySelectorAll('.joiner-row');
-    joinerRows.forEach((row) => {
-      const jName = row.querySelector('.joiner-name').value || "";
-      const jNote = row.querySelector('.joiner-note').value || "";
-      if (jName || jNote) {
-        formattedText += `   • ${jName} ${jNote ? '(' + jNote + ')' : ''}\n`;
-      }
+    textOutput += `**${title}**\n`;
+    if (leader) textOutput += `${leader}\n`;
+    
+    joinerItems.forEach(li => {
+      textOutput += `  ${li.innerText}\n`;
     });
-
-    formattedText += `\n`;
+    
+    textOutput += `\n`;
   });
 
-  navigator.clipboard.writeText(formattedText.trim()).then(() => {
+  // Fallback clipboard method if navigator.clipboard is restricted by browser
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(textOutput.trim()).then(showCopySuccess).catch(fallbackCopy);
+  } else {
+    fallbackCopy();
+  }
+
+  function fallbackCopy() {
+    const textArea = document.createElement("textarea");
+    textArea.value = textOutput.trim();
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textArea);
+    showCopySuccess();
+  }
+
+  function showCopySuccess() {
     const btn = document.getElementById('copy-btn');
-    const originalText = btn.innerText;
+    const orig = btn.innerText;
     btn.innerText = '✅ Copied to Clipboard!';
-    setTimeout(() => { btn.innerText = originalText; }, 2000);
-  });
+    setTimeout(() => { btn.innerText = orig; }, 2000);
+  }
 }
 
-// Download Summary as Image
+// Save image reading directly from the summary wrapper
 function downloadSummaryImage() {
   const element = document.getElementById('summary-content');
+  const btn = document.getElementById('img-btn');
+  const origText = btn.innerText;
+
+  btn.innerText = '⏳ Generating Image...';
 
   html2canvas(element, {
     backgroundColor: '#0b1120',
-    scale: 2
+    scale: 2,
+    useCORS: true,
+    logging: false
   }).then(canvas => {
     const link = document.createElement('a');
     link.download = `Foundry_Battle_Plan.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
+    btn.innerText = origText;
+  }).catch(err => {
+    console.error("Image generation failed:", err);
+    alert("Could not generate image automatically. Try taking a screenshot!");
+    btn.innerText = origText;
   });
 }
 
