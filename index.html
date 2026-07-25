@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Whiteout Survival - Foundry Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Foundry Point Calculator</title>
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -15,90 +15,107 @@
   </nav>
 
   <div class="container">
-    <h1>Foundry Score Calculator</h1>
-    
-    <!-- Map Image Header -->
-    <img src="map.png" alt="Foundry Map" class="map-img">
+    <h1>Foundry Point Calculator</h1>
+    <p class="subtitle">Estimate your alliance's total score for the event.</p>
 
-    <div class="section">
+    <div class="map-container">
+      <img src="https://raw.githubusercontent.com/zackrmt92-byte/foundry-calculator/main/foundry-map.png" alt="Foundry Map" class="map-image" onerror="this.style.display='none'">
+    </div>
+
+    <!-- 1. First Control Section -->
+    <div class="calc-section">
       <h2>1. First Control (One-time Points)</h2>
-      <label><input type="checkbox" id="imperial_fc"> Imperial Foundry (9,000 pts)</label><br>
-      <label><input type="checkbox" id="proto1_fc"> Prototype Site 1 (6,000 pts)</label><br>
-      <label><input type="checkbox" id="proto2_fc"> Prototype Site 2 (6,000 pts)</label><br>
-      <label><input type="checkbox" id="boiler_fc"> Boiler Room (1,200 pts)</label><br>
-      <label><input type="checkbox" id="transit_fc"> Transit Station (1,200 pts)</label><br>
-      <label><input type="checkbox" id="merc_fc"> Mercenary Camp (1,200 pts)</label><br>
-      <label><input type="checkbox" id="munition_fc"> Munitions Warehouse (1,200 pts)</label><br>
-      <hr>
-      <h3>Repair Facilities (3,000 pts each)</h3>
-      <label><input type="checkbox" id="rf1_fc"> Repair Facility 1</label><br>
-      <label><input type="checkbox" id="rf2_fc"> Repair Facility 2</label><br>
-      <label><input type="checkbox" id="rf3_fc"> Repair Facility 3</label><br>
-      <label><input type="checkbox" id="rf4_fc"> Repair Facility 4</label><br>
-      <hr>
-      <h3>Workshops Looted (4,800 pts each)</h3>
-      <label>Workshops Looted (0-24): 
-        <input type="number" id="workshops_count" value="0" min="0" max="24">
-      </label>
+      
+      <h4>Major Buildings</h4>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" id="fc-foundry" value="9000"> Imperial Foundry (9,000 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-site1" value="6000"> Prototype Site 1 (6,000 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-site2" value="6000"> Prototype Site 2 (6,000 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-boiler" value="1200"> Boiler Room (1,200 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-transit" value="1200"> Transit Station (1,200 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-mercenary" value="1200"> Mercenary Camp (1,200 pts)</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-munitions" value="1200"> Munitions Warehouse (1,200 pts)</label>
+      </div>
+
+      <h4>Repair Facilities (3,000 pts each)</h4>
+      <div class="checkbox-grid">
+        <label class="checkbox-item"><input type="checkbox" id="fc-rf1" value="3000"> Repair Facility 1</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-rf2" value="3000"> Repair Facility 2</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-rf3" value="3000"> Repair Facility 3</label>
+        <label class="checkbox-item"><input type="checkbox" id="fc-rf4" value="3000"> Repair Facility 4</label>
+      </div>
+
+      <h4>Workshops Looted (4,800 pts each)</h4>
+      <div class="inputs-grid" style="margin-top: 10px;">
+        <div class="input-group">
+          <label for="workshops">Workshops Looted (0-24):</label>
+          <input type="number" id="workshops" min="0" max="24" value="0">
+        </div>
+      </div>
     </div>
 
-    <div class="section">
+    <!-- 2. Ongoing Occupation Section -->
+    <div class="calc-section">
       <h2>2. Ongoing Occupation (Hold Time in Minutes)</h2>
-      <p style="font-size: 0.85em; color: #a0aec0;">Enter how many minutes your team held each building:</p>
-      
-      <label>
-        <input type="number" id="imperial_min" value="0" min="0" max="60"> 
-        Imperial Foundry (1,800 pts/m)
-      </label>
-      <label>
-        <input type="number" id="proto1_min" value="0" min="0" max="60"> 
-        Prototype Site 1 (1,200 pts/m)
-      </label>
-      <label>
-        <input type="number" id="proto2_min" value="0" min="0" max="60"> 
-        Prototype Site 2 (1,200 pts/m)
-      </label>
-      <label>
-        <input type="number" id="boiler_min" value="0" min="0" max="60"> 
-        Boiler Room (240 pts/m)
-      </label>
-      <label>
-        <input type="number" id="transit_min" value="0" min="0" max="60"> 
-        Transit Station (240 pts/m)
-      </label>
-      <label>
-        <input type="number" id="merc_min" value="0" min="0" max="60"> 
-        Mercenary Camp (240 pts/m)
-      </label>
-      <label>
-        <input type="number" id="munition_min" value="0" min="0" max="60"> 
-        Munitions Warehouse (240 pts/m)
-      </label>
-      
-      <hr>
-      <h3>Repair Facilities (600 pts/m each)</h3>
-      <label>
-        <input type="number" id="rf1_min" value="0" min="0" max="60"> 
-        Repair Facility 1
-      </label>
-      <label>
-        <input type="number" id="rf2_min" value="0" min="0" max="60"> 
-        Repair Facility 2
-      </label>
-      <label>
-        <input type="number" id="rf3_min" value="0" min="0" max="60"> 
-        Repair Facility 3
-      </label>
-      <label>
-        <input type="number" id="rf4_min" value="0" min="0" max="60"> 
-        Repair Facility 4
-      </label>
+      <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 15px;">Enter how many minutes your team held each building:</p>
+
+      <div class="inputs-grid">
+        <div class="input-group">
+          <label for="m-foundry">Imperial Foundry (1,800 pts/m)</label>
+          <input type="number" id="m-foundry" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-site1">Prototype Site 1 (1,200 pts/m)</label>
+          <input type="number" id="m-site1" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-site2">Prototype Site 2 (1,200 pts/m)</label>
+          <input type="number" id="m-site2" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-boiler">Boiler Room (240 pts/m)</label>
+          <input type="number" id="m-boiler" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-transit">Transit Station (240 pts/m)</label>
+          <input type="number" id="m-transit" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-mercenary">Mercenary Camp (240 pts/m)</label>
+          <input type="number" id="m-mercenary" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-munitions">Munitions Warehouse (240 pts/m)</label>
+          <input type="number" id="m-munitions" min="0" value="0">
+        </div>
+      </div>
+
+      <h4>Repair Facilities (600 pts/m each)</h4>
+      <div class="inputs-grid">
+        <div class="input-group">
+          <label for="m-rf1">Repair Facility 1</label>
+          <input type="number" id="m-rf1" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-rf2">Repair Facility 2</label>
+          <input type="number" id="m-rf2" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-rf3">Repair Facility 3</label>
+          <input type="number" id="m-rf3" min="0" value="0">
+        </div>
+        <div class="input-group">
+          <label for="m-rf4">Repair Facility 4</label>
+          <input type="number" id="m-rf4" min="0" value="0">
+        </div>
+      </div>
+
+      <button type="button" onclick="calculateScore()" class="btn-calc">Calculate Total Points</button>
     </div>
 
-    <button onclick="calculateScore()" style="width:100%; background-color:#2563eb; color:white;">Calculate Total Points</button>
-
-    <div class="result">
-      <h3>Total Estimated Arsenal Points: <span id="total-score">0</span></h3>
+    <!-- Total Results Card -->
+    <div class="result-box">
+      <h2>Total Estimated Arsenal Points: <span id="total-score">0</span></h2>
     </div>
   </div>
 
@@ -106,6 +123,44 @@
     Made by <strong>Zaak</strong>
   </footer>
 
-  <script src="script.js"></script>
+  <script>
+    function calculateScore() {
+      let total = 0;
+
+      // 1. Checkboxes
+      const checkboxes = document.querySelectorAll('.calc-section input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        if (cb.checked) {
+          total += parseInt(cb.value) || 0;
+        }
+      });
+
+      // 2. Workshops
+      const workshops = parseInt(document.getElementById('workshops').value) || 0;
+      total += workshops * 4800;
+
+      // 3. Occupation Minutes
+      const minMap = [
+        { id: 'm-foundry', pts: 1800 },
+        { id: 'm-site1', pts: 1200 },
+        { id: 'm-site2', pts: 1200 },
+        { id: 'm-boiler', pts: 240 },
+        { id: 'm-transit', pts: 240 },
+        { id: 'm-mercenary', pts: 240 },
+        { id: 'm-munitions', pts: 240 },
+        { id: 'm-rf1', pts: 600 },
+        { id: 'm-rf2', pts: 600 },
+        { id: 'm-rf3', pts: 600 },
+        { id: 'm-rf4', pts: 600 }
+      ];
+
+      minMap.forEach(item => {
+        const val = parseInt(document.getElementById(item.id).value) || 0;
+        total += val * item.pts;
+      });
+
+      document.getElementById('total-score').innerText = total.toLocaleString();
+    }
+  </script>
 </body>
 </html>
